@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Pardot
   class Error < StandardError; end
   class NetError < Error; end
@@ -9,11 +11,11 @@ module Pardot
     end
 
     def to_s
-      @res["__content__"]
+      @res['__content__']
     end
 
     def code
-      @res["code"].to_i
+      @res['code'].to_i
     end
 
     def inspect
