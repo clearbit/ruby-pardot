@@ -1,0 +1,37 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+
+Naming/FileName:
+  Exclude:
+    - lib/ruby-pardot.rb
+
+Layout/LineLength:
+  Enabled: false
+
+Lint/Void:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Naming/MethodName:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Naming/VariableName:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

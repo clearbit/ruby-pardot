@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", ">= 1.10"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
+  s.add_development_dependency "rubocop"
   s.add_development_dependency "fakeweb"
 
   s.files        = `git ls-files -z`.split("\x0").grep(%r{lib|README\.rdoc})
