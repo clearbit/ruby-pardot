@@ -5,6 +5,10 @@ rvm:
   - 2.6
   - 2.7
 
+script:
+  - bundle exec rake spec
+  - bundle exec rubocop
+
 # Build gem and show its contents
 after_success:
   - bundle exec rake build
