@@ -31,8 +31,5 @@ Metrics/PerceivedComplexity:
 Naming/MethodParameterName:
   Enabled: false
 
-Naming/VariableName:
-  Enabled: false
-
 Style/Documentation:
   Enabled: false
