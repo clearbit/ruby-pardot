@@ -1,13 +1,13 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 describe Pardot::Objects::Prospects do
-  
   before do
     @client = create_client
   end
-  
-  describe "query" do
-    
+
+  describe 'query' do
     def sample_results
       %(<?xml version="1.0" encoding="UTF-8"?>
       <rsp stat="ok" version="1.0">
@@ -24,22 +24,20 @@ describe Pardot::Objects::Prospects do
         </result>
       </rsp>)
     end
-    
-    it "should take in some arguments" do
-      fake_get "/api/prospect/version/3/do/query?assigned=true&format=simple", sample_results
-      
-      @client.prospects.query(:assigned => true).should == {"total_results" => 2, 
-        "prospect"=>[
-          {"last_name"=>"Smith", "first_name"=>"Jim"}, 
-          {"last_name"=>"Green", "first_name"=>"Sue"}
-        ]}
+
+    it 'should take in some arguments' do
+      fake_get '/api/prospect/version/3/do/query?assigned=true&format=simple', sample_results
+
+      @client.prospects.query(assigned: true).should == { 'total_results' => 2,
+                                                          'prospect' => [
+                                                            { 'last_name' => 'Smith', 'first_name' => 'Jim' },
+                                                            { 'last_name' => 'Green', 'first_name' => 'Sue' }
+                                                          ] }
       assert_authorization_header
     end
-    
   end
-  
-  describe "create" do
-    
+
+  describe 'create' do
     def sample_results
       %(<?xml version="1.0" encoding="UTF-8"?>
       <rsp stat="ok" version="1.0">
@@ -49,14 +47,12 @@ describe Pardot::Objects::Prospects do
         </prospect>
       </rsp>)
     end
-    
-    it "should return the prospect" do
-      fake_post "/api/prospect/version/3/do/create/email/user%40test.com?first_name=Jim&format=simple", sample_results
 
-      @client.prospects.create("user@test.com", :first_name => "Jim").should == {"last_name"=>"Smith", "first_name"=>"Jim"}
+    it 'should return the prospect' do
+      fake_post '/api/prospect/version/3/do/create/email/user%40test.com?first_name=Jim&format=simple', sample_results
+
+      @client.prospects.create('user@test.com', first_name: 'Jim').should == { 'last_name' => 'Smith', 'first_name' => 'Jim' }
       assert_authorization_header
     end
-    
   end
-  
 end

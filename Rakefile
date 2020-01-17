@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bundler/gem_tasks'
 
 begin
@@ -6,6 +8,6 @@ begin
   RSpec::Core::RakeTask.new(:spec)
 
   task default: :spec
-rescue LoadError
+rescue LoadError # rubocop:disable Lint/SuppressedException
   # Ignore outside test envrionment.
 end
