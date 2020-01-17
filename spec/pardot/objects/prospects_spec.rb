@@ -74,7 +74,9 @@ describe Pardot::Objects::Prospects do
 
         @client.prospects.batch_create([{ email: 'user@test.com', first_name: 'Jim' }])
 
-        expect(FakeWeb.last_request.body).to eq('abc123')
+        expect(FakeWeb.last_request.body).to eq({
+          prospects: [{ email: 'user@test.com', first_name: 'Jim' }]
+        }.to_json)
       end
     end
 
@@ -84,7 +86,9 @@ describe Pardot::Objects::Prospects do
 
         @client.prospects.batch_update('123' => { first_name: 'Jim' })
 
-        expect(FakeWeb.last_request.body).to eq('abc123')
+        expect(FakeWeb.last_request.body).to eq({
+          prospects: [{ email: 'user@test.com', first_name: 'Jim' }]
+        }.to_json)
       end
     end
 
@@ -94,7 +98,9 @@ describe Pardot::Objects::Prospects do
 
         @client.prospects.batch_upsert([{ email: 'user@test.com', first_name: 'Jim' }])
 
-        expect(FakeWeb.last_request.body).to eq('abc123')
+        expect(FakeWeb.last_request.body).to eq({
+          prospects: [{ email: 'user@test.com', first_name: 'Jim' }]
+        }.to_json)
       end
     end
   end

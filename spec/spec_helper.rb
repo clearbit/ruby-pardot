@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require 'rubygems'
 require 'cgi'
 require 'tempfile'
-require 'rspec'
 
 require 'crack'
 require 'httparty'
+require 'rspec'
+require 'pry'
 
 require 'ruby-pardot'
 
