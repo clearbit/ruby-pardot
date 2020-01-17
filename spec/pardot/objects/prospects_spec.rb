@@ -69,15 +69,12 @@ describe Pardot::Objects::Prospects do
         RESPONSE
       end
 
-      let(:endpoint) do
-        '/api/prospect/version/4/do/batchCreate?prospects=%7B%22prospects%22%3A%5B%7B%22email%22%3A%22user%40test.com'\
-        '%22%2C%22first_name%22%3A%22Jim%22%7D%5D%7D&user_key=bar&api_key=my_api_key&format=simple'
-      end
-
-      it 'should call proper endpoint' do
-        fake_post endpoint, sample_response
+      it 'calls the proper endpoint' do
+        fake_post '/api/prospect/version/4/do/batchCreate?format=simple', sample_response
 
         @client.prospects.batch_create([{ email: 'user@test.com', first_name: 'Jim' }])
+
+        expect(FakeWeb.last_request.body).to eq('abc123')
       end
     end
 
@@ -91,15 +88,12 @@ describe Pardot::Objects::Prospects do
         RESPONSE
       end
 
-      let(:endpoint) do
-        '/api/prospect/version/4/do/batchUpdate?prospects=%7B%22prospects%22%3A%7B%22123%22%3A%7B%22'\
-        'first_name%22%3A%22Jim%22%7D%7D%7D&user_key=bar&api_key=my_api_key&format=simple'
-      end
-
-      it 'should call proper endpoint' do
-        fake_post endpoint, sample_response
+      it 'calls the proper endpoint' do
+        fake_post '/api/prospect/version/4/do/batchUpdate?format=simple', sample_response
 
         @client.prospects.batch_update('123' => { first_name: 'Jim' })
+
+        expect(FakeWeb.last_request.body).to eq('abc123')
       end
     end
 
@@ -113,15 +107,12 @@ describe Pardot::Objects::Prospects do
         RESPONSE
       end
 
-      let(:endpoint) do
-        '/api/prospect/version/4/do/batchUpsert?prospects=%7B%22prospects%22%3A%5B%7B%22email%22%3A%22'\
-        'user%40test.com%22%2C%22first_name%22%3A%22Jim%22%7D%5D%7D&user_key=bar&api_key=my_api_key&format=simple'
-      end
-
-      it 'should call proper endpoint' do
-        fake_post endpoint, sample_response
+      it 'calls the proper endpoint' do
+        fake_post '/api/prospect/version/4/do/batchUpsert?format=simple', sample_response
 
         @client.prospects.batch_upsert([{ email: 'user@test.com', first_name: 'Jim' }])
+
+        expect(FakeWeb.last_request.body).to eq('abc123')
       end
     end
   end
