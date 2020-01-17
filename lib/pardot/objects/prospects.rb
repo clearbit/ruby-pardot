@@ -93,15 +93,15 @@ module Pardot
         end
 
         def batch_create(prospects = [])
-          post('/do/batchCreate', {}, 'prospect', prospects: { prospects: prospects }.to_json)
+          post('/do/batchCreate', {}, 'prospect', { prospects: prospects }.to_json)
         end
 
         def batch_update(prospects = [])
-          post('/do/batchUpdate', {}, 'prospect', prospects: { prospects: prospects }.to_json)
+          post('/do/batchUpdate', {}, 'prospect', { prospects: prospects }.to_json)
         end
 
         def batch_upsert(prospects = [])
-          post('/do/batchUpsert', {}, 'prospect', prospects: { prospects: prospects }.to_json)
+          post('/do/batchUpsert', {}, 'prospect', { prospects: prospects }.to_json)
         end
 
         protected
@@ -111,8 +111,8 @@ module Pardot
           result ? response[result] : response
         end
 
-        def post(path, params = {}, result = 'prospect', body_params = {})
-          response = @client.post('prospect', path, params, 0, body_params)
+        def post(path, params = {}, result = 'prospect', body = nil)
+          response = @client.post('prospect', path, params, 0, body)
           result ? response[result] : response
         end
       end
