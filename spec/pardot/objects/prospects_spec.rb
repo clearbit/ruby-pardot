@@ -54,7 +54,6 @@ describe Pardot::Objects::Prospects do
       @client.prospects.create('user@test.com', first_name: 'Jim').should == { 'last_name' => 'Smith', 'first_name' => 'Jim' }
       assert_authorization_header
     end
-
   end
 
   context 'for API version 4:' do
@@ -62,11 +61,11 @@ describe Pardot::Objects::Prospects do
 
     describe 'batch_create' do
       let(:sample_response) do
-        <<-RESPONSE
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<rsp stat=\"ok\" version=\"1.0\">
-  <errors/>
-</rsp>
+        <<~RESPONSE
+          <?xml version=\"1.0\" encoding=\"UTF-8\"?>
+          <rsp stat=\"ok\" version=\"1.0\">
+            <errors/>
+          </rsp>
         RESPONSE
       end
 
@@ -78,17 +77,17 @@ describe Pardot::Objects::Prospects do
       it 'should call proper endpoint' do
         fake_post endpoint, sample_response
 
-        @client.prospects.batch_create([{ :email => 'user@test.com', :first_name => 'Jim' }])
+        @client.prospects.batch_create([{ email: 'user@test.com', first_name: 'Jim' }])
       end
     end
 
     describe 'batch_update' do
       let(:sample_response) do
-        <<-RESPONSE
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<rsp stat=\"ok\" version=\"1.0\">
-  <errors/>
-</rsp>
+        <<~RESPONSE
+          <?xml version=\"1.0\" encoding=\"UTF-8\"?>
+          <rsp stat=\"ok\" version=\"1.0\">
+            <errors/>
+          </rsp>
         RESPONSE
       end
 
@@ -100,17 +99,17 @@ describe Pardot::Objects::Prospects do
       it 'should call proper endpoint' do
         fake_post endpoint, sample_response
 
-        @client.prospects.batch_update({ '123' => { :first_name => 'Jim' }})
+        @client.prospects.batch_update('123' => { first_name: 'Jim' })
       end
     end
 
     describe 'batch_upsert' do
       let(:sample_response) do
-        <<-RESPONSE
-<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<rsp stat=\"ok\" version=\"1.0\">
-  <errors/>
-</rsp>
+        <<~RESPONSE
+          <?xml version=\"1.0\" encoding=\"UTF-8\"?>
+          <rsp stat=\"ok\" version=\"1.0\">
+            <errors/>
+          </rsp>
         RESPONSE
       end
 
@@ -122,7 +121,7 @@ describe Pardot::Objects::Prospects do
       it 'should call proper endpoint' do
         fake_post endpoint, sample_response
 
-        @client.prospects.batch_upsert([{ :email => 'user@test.com', :first_name => 'Jim' }])
+        @client.prospects.batch_upsert([{ email: 'user@test.com', first_name: 'Jim' }])
       end
     end
   end
