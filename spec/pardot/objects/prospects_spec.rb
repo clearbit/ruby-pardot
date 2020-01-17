@@ -57,18 +57,18 @@ describe Pardot::Objects::Prospects do
   end
 
   context 'for API version 4:' do
+    let(:sample_response) do
+      <<~RESPONSE
+        <?xml version=\"1.0\" encoding=\"UTF-8\"?>
+        <rsp stat=\"ok\" version=\"1.0\">
+          <errors/>
+        </rsp>
+      RESPONSE
+    end
+
     before { @client.version = 4 }
 
-    describe 'batch_create' do
-      let(:sample_response) do
-        <<~RESPONSE
-          <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-          <rsp stat=\"ok\" version=\"1.0\">
-            <errors/>
-          </rsp>
-        RESPONSE
-      end
-
+    describe '#batch_create' do
       it 'calls the proper endpoint' do
         fake_post '/api/prospect/version/4/do/batchCreate?format=simple', sample_response
 
@@ -78,16 +78,7 @@ describe Pardot::Objects::Prospects do
       end
     end
 
-    describe 'batch_update' do
-      let(:sample_response) do
-        <<~RESPONSE
-          <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-          <rsp stat=\"ok\" version=\"1.0\">
-            <errors/>
-          </rsp>
-        RESPONSE
-      end
-
+    describe '#batch_update' do
       it 'calls the proper endpoint' do
         fake_post '/api/prospect/version/4/do/batchUpdate?format=simple', sample_response
 
@@ -97,16 +88,7 @@ describe Pardot::Objects::Prospects do
       end
     end
 
-    describe 'batch_upsert' do
-      let(:sample_response) do
-        <<~RESPONSE
-          <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-          <rsp stat=\"ok\" version=\"1.0\">
-            <errors/>
-          </rsp>
-        RESPONSE
-      end
-
+    describe '#batch_upsert' do
       it 'calls the proper endpoint' do
         fake_post '/api/prospect/version/4/do/batchUpsert?format=simple', sample_response
 
