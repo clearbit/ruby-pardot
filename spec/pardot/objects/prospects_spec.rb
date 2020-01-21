@@ -64,17 +64,6 @@ describe Pardot::Objects::Prospects do
       RESPONSE
     end
 
-    let(:error_response) do
-      <<~'RESPONSE'
-        <?xml version="1.0" encoding="UTF-8"?>
-        <rsp stat="fail" version="1.0">
-          <errors>
-              <prospect identifier="0">Invalid prospect email address</prospect>
-          </errors>
-        </rsp>
-      RESPONSE
-    end
-
     before do
       client.version = 4
     end
@@ -121,6 +110,27 @@ describe Pardot::Objects::Prospects do
           }.to_json
         )
         expect(FakeWeb.last_request.body).to eq(expected_result)
+      end
+    end
+
+    context 'when the API returns an error' do
+      let(:error_response) do
+        <<~'RESPONSE'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <rsp stat="fail" version="1.0">
+            <errors>
+              <prospect identifier="0">Invalid prospect email address</prospect>
+            </errors>
+          </rsp>
+        RESPONSE
+      end
+
+      it 'raises an error' do
+        fake_post '/api/prospect/version/4/do/batchCreate?format=simple', error_response
+
+        expect do
+          client.prospects.batch_create([{ first_name: 'Jim' }])
+        end.to raise_error(Pardot::ResponseError, /Invalid prospect email address/)
       end
     end
   end
