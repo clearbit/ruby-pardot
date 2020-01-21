@@ -92,6 +92,18 @@ module Pardot
           post "/do/upsert/fid/#{CGI.escape(fid)}", params
         end
 
+        def batch_create(prospects = [])
+          post('/do/batchCreate', {}, 'prospect', prospects: { prospects: prospects }.to_json)
+        end
+
+        def batch_update(prospects = [])
+          post('/do/batchUpdate', {}, 'prospect', prospects: { prospects: prospects }.to_json)
+        end
+
+        def batch_upsert(prospects = [])
+          post('/do/batchUpsert', {}, 'prospect', prospects: { prospects: prospects }.to_json)
+        end
+
         protected
 
         def get(path, params = {}, result = 'prospect')
@@ -99,8 +111,8 @@ module Pardot
           result ? response[result] : response
         end
 
-        def post(path, params = {}, result = 'prospect')
-          response = @client.post 'prospect', path, params
+        def post(path, params = {}, result = 'prospect', body = nil)
+          response = @client.post('prospect', path, params, 0, body)
           result ? response[result] : response
         end
       end
