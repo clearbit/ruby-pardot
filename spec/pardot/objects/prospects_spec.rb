@@ -130,7 +130,7 @@ describe Pardot::Objects::Prospects do
 
         expect do
           client.prospects.batch_create([{ first_name: 'Jim' }])
-        end.to raise_error(Pardot::ResponseError, /Invalid prospect email address/)
+        end.to raise_error(Pardot::ResponseError)
       end
     end
   end
